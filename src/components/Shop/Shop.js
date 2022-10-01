@@ -17,28 +17,43 @@ const Shop = () => {
       });
   }, []);
 
-  const cartProducts = getCartData();
-  const savedCart = [];
-
+  const previousStoredCart = getCartData();
+  const previousaddedProducts = [];
   useEffect(() => {
-    for (const id in cartProducts) {
-      const addedProduct = products.find((product) => product.id === id);
-      if (addedProduct) {
-        const quantity = cartProducts[id];
-        addedProduct.quantity = quantity;
-        console.log(addedProduct);
-        savedCart.push(addedProduct);
+    for (let id in previousStoredCart) {
+      const previousaddedProduct = products.find(
+        (product) => product.id === id
+      );
+      if (previousaddedProduct) {
+        const quantity = previousStoredCart[id];
+        previousaddedProduct.quantity = quantity;
+        previousaddedProducts.push(previousaddedProduct);
+        console.log(previousaddedProduct);
       }
-      setCart(savedCart);
     }
+
+    setCart(previousaddedProducts);
   }, [products]);
 
-  const addtoCart = (product) => {
-    const newCart = [...cart, product];
+  const addtoCart = (selectedProduct) => {
+    let newCart = [];
+    let isExist = cart.find((product) => product.id === selectedProduct.id);
+    if (isExist) {
+      //   //     way 1 :: just increase  the quantity  set newCartvalue selectedProduct.quantity += 1;
+      //   selectedProduct.quantity += 1;
+      //   newCart = [...cart];
+      //way 2 ::  break the array  & increase quantity and jooin and set value to newCart.
+      const rest = cart.filter((product) => product.id !== selectedProduct.id);
+      selectedProduct.quantity += 1;
+      newCart = [...rest, selectedProduct];
+    } else {
+      selectedProduct.quantity = 1;
+      newCart = [...cart, selectedProduct];
+    }
 
     // console.log(newCart);
     setCart(newCart);
-    addToDb(product);
+    addToDb(selectedProduct);
   };
   return (
     <div className="">
