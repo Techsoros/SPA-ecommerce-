@@ -1,12 +1,24 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import Header from "./components/Header/Header";
-import Shop from "./components/Shop/Shop";
+import Error404 from "./components/Error404/Error404";
+
+import MainLayout from "./layouts/MainLayout";
 // Starting 53 work
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <MainLayout></MainLayout>,
+      children: [
+        {
+          path: "/about",
+        },
+      ],
+    },
+  ]);
   return (
     <div className="my-body">
-      <Header></Header>
-      <Shop></Shop>
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }
