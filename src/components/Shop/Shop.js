@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 import { addToDb, getCartData } from "../../utilities/fakedb";
 import Cart from "../Cart/Cart";
 import Product from "../Product/Product";
 import "./Shop.css";
 
 const Shop = () => {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
+  const products = useLoaderData();
 
-  useEffect(() => {
-    fetch("products.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-        // console.log("products load  complete");
-      });
-  }, []);
+  const [cart, setCart] = useState([]);
 
   const previousStoredCart = getCartData();
   const previousaddedProducts = [];
@@ -68,7 +61,11 @@ const Shop = () => {
           ))}
         </div>
 
-        <div className="cart-container">
+        <div
+          data-aos="fade-left"
+          data-aos-delay="300"
+          className="cart-container "
+        >
           <div className="cart-main">
             <Cart cart={cart}></Cart>
           </div>

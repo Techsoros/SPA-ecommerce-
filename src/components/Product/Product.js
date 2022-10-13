@@ -7,7 +7,11 @@ const Product = (props) => {
   const { name, seller, price, ratings, img } = details;
 
   return (
-    <div className="product-card">
+    <div
+      className="product-card"
+      data-aos="fade-up"
+      data-aos-anchor-placement="top-center"
+    >
       <div className="product-img">
         <img src={img} alt="" />
       </div>
