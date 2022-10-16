@@ -8,6 +8,7 @@ import Shop from "./components/Shop/Shop";
 import MainLayout from "./layouts/MainLayout";
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
+import { cartProductsLoader } from "./loaders/cartProductsLoader";
 // ..
 AOS.init();
 
@@ -24,7 +25,8 @@ function App() {
         },
         {
           path: "",
-          element: <h1 className="text-center">Default Page</h1>,
+          loader: () => fetch("products.json"),
+          element: <Shop></Shop>,
         },
         {
           path: "shop",
@@ -33,7 +35,7 @@ function App() {
         },
         {
           path: "order",
-          loader: () => fetch("products.json"),
+          loader: () => cartProductsLoader(),
           element: <Order></Order>,
         },
         {

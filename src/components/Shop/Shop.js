@@ -21,7 +21,6 @@ const Shop = () => {
         const quantity = previousStoredCart[id];
         previousaddedProduct.quantity = quantity;
         previousaddedProducts.push(previousaddedProduct);
-        console.log(previousaddedProduct);
       }
     }
 

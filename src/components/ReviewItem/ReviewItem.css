@@ -1,0 +1,20 @@
+.review-card{
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+}
+.review-img img{
+    max-width: 120px;
+}
+.review-body{
+    min-width: 390px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.review-body h4{
+    margin:8px 0;
+}
+.review-body p{
+    margin: 5px 0;
+}
